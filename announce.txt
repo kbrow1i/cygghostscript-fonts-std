@@ -1,0 +1,18 @@
+From cygwin-announce-urw-base35-fonts-20170801-1 Wed Nov 01 10:18:38 2017
+From: Ken Brown <kbrown@cornell.edu>
+To: cygwin-announce@cygwin.com
+Date: Wed, 01 Nov 2017 10:18:38 -0400
+Subject: urw-base35-fonts 20170801-1
+
+The following packages have been uploaded to the Cygwin distribution:
+
+* urw-base35-fonts-20170801-1
+
+This package, which used to be called "ghostscript-fonts-std",
+contains the 35 fonts in the PostScript Level 2 Core Font Set.  These
+fonts are used by ghostscript.
+
+This is an update to the latest upstream release.
+
+Ken Brown
+Cygwin's (new) urw-base35-fonts maintainer.

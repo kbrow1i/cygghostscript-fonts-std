@@ -1,0 +1,39 @@
+# http://pkgs.fedoraproject.org/cgit/rpms/urw-base35-fonts.git/tree/urw-base35-fonts.spec
+
+inherit font
+
+NAME="urw-base35-fonts"
+VERSION=20170801
+RELEASE=1
+CATEGORY="Graphics X11"
+SUMMARY="The 35 fonts in the PostScript Level 2 Core Font Set"
+DESCRIPTION="This package contains the 35 fonts in the PostScript Level 2 Core Font
+Set.  These fonts are used by ghostscript."
+
+HOMEPAGE="https://github.com/ArtifexSoftware/urw-base35-fonts/"
+SRC_URI="${HOMEPAGE}/archive/${VERSION}.tar.gz"
+
+OBSOLETES="ghostscript-fonts-std"
+
+src_compile() {
+	:
+}
+
+src_test() {
+	:
+}
+
+src_install() {
+	cd ${S}
+	fontinto ${NAME%-fonts}
+	dofont fonts/*.t1
+	dofont fonts/*.afm
+
+	cd fontconfig
+	for f in *.conf
+	do
+	    newfontconf ${f} 60-${f}
+	done
+}
+
+ARCH="noarch"
