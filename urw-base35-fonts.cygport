@@ -4,7 +4,7 @@ inherit font
 
 NAME="urw-base35-fonts"
 VERSION=20170801
-RELEASE=2
+RELEASE=3
 CATEGORY="Graphics X11"
 SUMMARY="The 35 fonts in the PostScript Level 2 Core Font Set"
 DESCRIPTION="This package contains the 35 fonts in the PostScript Level 2 Core Font
@@ -12,7 +12,6 @@ Set.  These fonts are used by ghostscript."
 
 HOMEPAGE="https://github.com/ArtifexSoftware/urw-base35-fonts/"
 SRC_URI="${HOMEPAGE}/archive/${VERSION}.tar.gz"
-SRC_URI+=" mirror://sourceforge/gs-fonts/ghostscript-fonts-std-8.11.tar.gz"
 
 OBSOLETES="ghostscript-fonts-std"
 
@@ -27,14 +26,9 @@ src_test() {
 src_install() {
 	cd ${S}
 	fontinto ${NAME%-fonts}
-	# Fedora only packages T1 and AFM files...
+	# Fedora only packages T1 and AFM files.
 	dofont fonts/*.t1
 	dofont fonts/*.afm
-	# ...but xpdf seems to require the PFB fonts from the old
-	# ghostscript-fonts-std package.
-	insinto /usr/share/ghostscript/fonts
-	doins ../fonts/*.pfb
-	doins ../fonts/fonts.*
 
 	cd fontconfig
 	for f in *.conf
