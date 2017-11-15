@@ -1,20 +1,18 @@
-From cygwin-announce-urw-base35-fonts-20170801-2 Fri Nov 03 12:57:23 2017
+From cygwin-announce-urw-base35-fonts-20170801-3 Wed Nov 15 13:54:59 2017
 From: Ken Brown <kbrown@cornell.edu>
 To: cygwin-announce@cygwin.com
-Date: Fri, 03 Nov 2017 12:57:23 -0400
-Subject: urw-base35-fonts 20170801-2
+Date: Wed, 15 Nov 2017 13:54:59 -0500
+Subject: urw-base35-fonts 20170801-3
 
-The following packages have been uploaded to the Cygwin distribution:
+The following package has been uploaded to the Cygwin distribution:
 
-* urw-base35-fonts-20170801-2
+* urw-base35-fonts-20170801-3
 
-This package, which used to be called "ghostscript-fonts-std",
-contains the 35 fonts in the PostScript Level 2 Core Font Set.  These
-fonts are used by ghostscript and xpdf.
+This package contains the 35 fonts in the PostScript Level 2 Core Font
+Set.  These fonts are used by ghostscript and xpdf.
 
-This is a rebuild of the 20170801-1 package, in which I have added the
-font files /usr/share/ghostscript/fonts/*.pfb from the old
-ghostscrpt-fonts-std package.  These seem to be needed by xpdf.
+This release removes a workaround for an xpdf problem that has now
+been fixed properly.
 
 Ken Brown
 Cygwin's urw-base35-fonts maintainer.
