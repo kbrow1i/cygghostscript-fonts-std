@@ -4,14 +4,17 @@ inherit font
 
 NAME="urw-base35-fonts"
 VERSION=20170801
-RELEASE=3
+RELEASE=4
 CATEGORY="Graphics X11"
 SUMMARY="The 35 fonts in the PostScript Level 2 Core Font Set"
 DESCRIPTION="This package contains the 35 fonts in the PostScript Level 2 Core Font
-Set.  These fonts are used by ghostscript."
+Set.  These fonts are used by ghostscript and xpdf."
 
 HOMEPAGE="https://github.com/ArtifexSoftware/urw-base35-fonts/"
 SRC_URI="${HOMEPAGE}/archive/${VERSION}.tar.gz"
+
+# From Fedora, also applied upstream
+PATCH_URI="urw-base35-fonts-20170801-002-BdOblique-renamed.patch"
 
 OBSOLETES="ghostscript-fonts-std"
 
