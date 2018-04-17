@@ -4,19 +4,39 @@ inherit font
 
 NAME="urw-base35-fonts"
 VERSION=20170801
-RELEASE=4
+RELEASE=5
 CATEGORY="Graphics X11"
 SUMMARY="The 35 fonts in the PostScript Level 2 Core Font Set"
-DESCRIPTION="This package contains the 35 fonts in the PostScript Level 2 Core Font
-Set.  These fonts are used by ghostscript and xpdf."
+
+PKG_NAMES="${NAME} ${NAME}-legacy"
+
+# https://bugzilla.redhat.com/show_bug.cgi?id=1551219
+urw_base35_fonts_DESCRIPTION="This package contains the 35 fonts in the PostScript Level 2 Core Font
+Set.  These fonts are used by ghostscript, xpdf, and other
+applications."
+
+urw_base35_fonts_legacy_DESCRIPTION="The urw-base35-fonts-legacy subpackage contains older versions of the
+urw fonts that are still needed by some applications, such as xfig."
 
 HOMEPAGE="https://github.com/ArtifexSoftware/urw-base35-fonts/"
+
 SRC_URI="${HOMEPAGE}/archive/${VERSION}.tar.gz"
+SRC_URI+=" https://src.fedoraproject.org/repo/pkgs/urw-fonts/urw-fonts-1.0.7pre44.tar.bz2/51c6c2690593cd9bd92f197a6f2ff8bd/urw-fonts-1.0.7pre44.tar.bz2"
 
 # From Fedora, also applied upstream
 PATCH_URI="urw-base35-fonts-20170801-002-BdOblique-renamed.patch"
 
-OBSOLETES="ghostscript-fonts-std"
+urw_base35_fonts_OBSOLETES="ghostscript-fonts-std"
+
+urw_base35_fonts_CONTENTS="--exclude=usr/share/X11 etc/fonts usr/share"
+urw_base35_fonts_legacy_CONTENTS="etc/X11 usr/share/X11"
+
+CYGPORT_USE_UNSTABLE_API=1
+src_unpack_hook() {
+    cd ..
+    mkdir -p legacy
+    mv *.afm *.pfb *.pfm ChangeLog COPYING fonts.* README* legacy/
+}
 
 src_compile() {
 	:
@@ -29,15 +49,19 @@ src_test() {
 src_install() {
 	cd ${S}
 	fontinto ${NAME%-fonts}
-	# Fedora only packages T1 and AFM files.
-	dofont fonts/*.t1
-	dofont fonts/*.afm
-
-	cd fontconfig
+	dofont fonts/*.t1 fonts/*.afm fonts/*.otf
+	pushd fontconfig
 	for f in *.conf
 	do
 	    newfontconf ${f} 60-${f}
 	done
+	popd
+
+	cd ../legacy
+	insinto /usr/share/X11/fonts/urw-fonts
+	doins *.afm *.pfm *.pfb
+	dodir /etc/X11/fontpath.d
+	dosym /usr/share/X11/fonts/urw-fonts /etc/X11/fontpath.d/urw-fonts	
 }
 
 ARCH="noarch"
