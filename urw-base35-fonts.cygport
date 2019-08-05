@@ -31,6 +31,8 @@ urw_base35_fonts_OBSOLETES="ghostscript-fonts-std"
 urw_base35_fonts_CONTENTS="--exclude=usr/share/X11 etc/fonts usr/share"
 urw_base35_fonts_legacy_CONTENTS="etc/X11 usr/share/X11"
 
+DEPEND="mkfontscale mkfontdir"
+
 CYGPORT_USE_UNSTABLE_API=1
 src_unpack_hook() {
     cd ..
